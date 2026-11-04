@@ -196,22 +196,23 @@
 
       <!-- Hero Product Showcase Frame (Apple Style) -->
       <div class="mt-14 max-w-3xl mx-auto">
-        <div class="relative rounded-[32px] overflow-hidden bg-[#f5f5f7] border border-[#e5e5ea] shadow-xl p-3 sm:p-4 transition hover:shadow-2xl">
-          <div class="relative rounded-[24px] overflow-hidden bg-white aspect-[4/3] sm:aspect-[16/10]">
+        <div class="rounded-[32px] overflow-hidden bg-[#f5f5f7] border border-[#e5e5ea] shadow-xl p-3 sm:p-4 transition hover:shadow-2xl">
+          <!-- The Photo (Fully Unobscured) -->
+          <div class="rounded-[24px] overflow-hidden bg-white aspect-[4/3] sm:aspect-[16/10]">
             <img src="assets/images/profile-fb.jpg" alt="Vegesna Rohini - Official Portrait" class="w-full h-full object-cover object-top hover:scale-102 transition duration-700">
-            
-            <!-- Bottom Frosted Info Bar inside Frame -->
-            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-white/60 shadow-lg text-left flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <span class="text-[11px] font-semibold text-[#0071e3] uppercase tracking-wider block">Candidate for Bhimavaram Municipal Chairperson</span>
-                <h3 class="text-sm font-bold text-[#1d1d1f]">Vegesna Rama Bangaru Rohini</h3>
-                <p class="text-xs text-[#86868b]">Assistant Professor • SRKR Engineering College</p>
-              </div>
-              <div class="flex items-center gap-2">
-                <a href="https://www.instagram.com/vegesnarohini.official/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full bg-[#f5f5f7] hover:bg-[#e5e5ea] text-[11px] font-semibold text-[#1d1d1f] transition flex items-center gap-1.5">
-                  <span class="text-pink-600">📸</span> @vegesnarohini.official
-                </a>
-              </div>
+          </div>
+          
+          <!-- Placed Below the Pic -->
+          <div class="mt-3 p-4 sm:p-5 rounded-2xl bg-white border border-[#e5e5ea] shadow-sm text-left flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <span class="text-[11px] font-semibold text-[#0071e3] uppercase tracking-wider block">Candidate for Bhimavaram Municipal Chairperson</span>
+              <h3 class="text-base font-bold text-[#1d1d1f]">Vegesna Rama Bangaru Rohini</h3>
+              <p class="text-xs text-[#86868b] mt-0.5">Assistant Professor • SRKR Engineering College</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <a href="https://www.instagram.com/vegesnarohini.official/" target="_blank" rel="noopener" class="px-3.5 py-1.5 rounded-full bg-[#f5f5f7] hover:bg-[#e5e5ea] text-[11px] font-semibold text-[#1d1d1f] transition flex items-center gap-1.5 border border-[#e5e5ea]">
+                <span class="text-pink-600">📸</span> @vegesnarohini.official
+              </a>
             </div>
           </div>
         </div>
