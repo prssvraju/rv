@@ -1,0 +1,54 @@
+[
+    {
+        "id": "VR-BV-7251",
+        "timestamp": "2026-11-04 19:06:24",
+        "name": "R. Subrahmanyam",
+        "phone": "9988776655",
+        "ward": "Ward 26 (SRKR Road \/ Chinna Amiram)",
+        "locality": "Near College Gate",
+        "category": "Road Repairs &amp; Potholes",
+        "priority": "High",
+        "description": "Potholes developed on the main entrance stretch causing traffic slowdown during peak college hours.",
+        "status": "Received",
+        "notes": "Acknowledged. Assigned to ward coordination team for review."
+    },
+    {
+        "id": "VR-BV-8402",
+        "timestamp": "2026-11-03 10:15:22",
+        "name": "K. Venkata Rao",
+        "phone": "9848012345",
+        "ward": "Ward 14 (Somavaram)",
+        "locality": "Near Ramalayam Temple",
+        "category": "Sanitation & Waste Management",
+        "priority": "High",
+        "description": "Garbage accumulation near municipal dustbin and canal bank. Requesting daily pickup and clearing.",
+        "status": "In Progress",
+        "notes": "Forwarded to ward sanitary inspector. Cleaning team scheduled."
+    },
+    {
+        "id": "VR-BV-8403",
+        "timestamp": "2026-11-03 14:40:10",
+        "name": "P. Lakshmi Durga",
+        "phone": "9440198765",
+        "ward": "Ward 07 (Bhimavaram Town)",
+        "locality": "Opposite Gandhi Park",
+        "category": "Drinking Water Supply",
+        "priority": "Urgent",
+        "description": "Low pressure drinking water supply for the past 3 days in 3rd line.",
+        "status": "Action Initiated",
+        "notes": "Pipeline valve inspection under way by municipal water works."
+    },
+    {
+        "id": "VR-BV-8404",
+        "timestamp": "2026-11-04 09:20:45",
+        "name": "M. Suresh Raju",
+        "phone": "9849255678",
+        "ward": "Ward 22 (Balusumoodi)",
+        "locality": "Near SRKR Road",
+        "category": "Street Lighting & Roads",
+        "priority": "Medium",
+        "description": "Three LED street lights flickering and non-operational at night near curve road.",
+        "status": "Resolved",
+        "notes": "LED lights replaced by electrical team on 4th Nov."
+    }
+]

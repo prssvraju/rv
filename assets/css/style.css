@@ -1,0 +1,236 @@
+/* Apple-Inspired Clean White Theme for Vegesna Rohini Official Portal */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap');
+
+:root {
+  --apple-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", -apple-system, sans-serif;
+  --apple-telugu-font: 'Noto Sans Telugu', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Apple Color Palette */
+  --apple-bg: #ffffff;
+  --apple-bg-alt: #f5f5f7;
+  --apple-bg-subtle: #fbfbfd;
+  --apple-text-primary: #1d1d1f;
+  --apple-text-secondary: #6e6e73;
+  --apple-text-tertiary: #86868b;
+  --apple-border: rgba(0, 0, 0, 0.08);
+  --apple-border-light: rgba(0, 0, 0, 0.04);
+  
+  /* Apple Accents */
+  --apple-blue: #0071e3;
+  --apple-blue-hover: #0077ed;
+  --apple-blue-light: #e8f0fe;
+  
+  /* Identity Accent */
+  --crimson-accent: #e11d48;
+  --amber-accent: #d97706;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--apple-font);
+  background-color: var(--apple-bg);
+  color: var(--apple-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.lang-te {
+  font-family: var(--apple-telugu-font);
+  line-height: 1.75;
+}
+
+/* Apple Frosted Glass Navbar */
+.apple-nav {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--apple-border);
+}
+
+/* Apple Pill Buttons */
+.apple-btn-primary {
+  background-color: var(--apple-blue);
+  color: #ffffff;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.apple-btn-primary:hover {
+  background-color: var(--apple-blue-hover);
+  transform: scale(1.01);
+}
+
+.apple-btn-dark {
+  background-color: #1d1d1f;
+  color: #ffffff;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.apple-btn-dark:hover {
+  background-color: #333336;
+  transform: scale(1.01);
+}
+
+.apple-btn-secondary {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--apple-text-primary);
+  border: 1px solid var(--apple-border);
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.apple-btn-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.apple-link {
+  color: var(--apple-blue);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+}
+.apple-link:hover {
+  text-decoration: underline;
+  color: var(--apple-blue-hover);
+}
+
+/* Apple Bento Cards */
+.apple-card {
+  background-color: #ffffff;
+  border-radius: 28px;
+  border: 1px solid var(--apple-border);
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.04);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.apple-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -4px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.14);
+}
+
+.apple-card-subtle {
+  background-color: var(--apple-bg-alt);
+  border-radius: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.apple-card-subtle:hover {
+  background-color: #ededf0;
+  transform: translateY(-3px);
+}
+
+/* Apple Typography */
+.apple-headline {
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: var(--apple-text-primary);
+}
+
+.apple-subhead {
+  letter-spacing: -0.01em;
+  color: var(--apple-text-secondary);
+}
+
+.apple-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--apple-text-secondary);
+}
+
+/* Subtle Gradient for Big Hero Punchline */
+.apple-gradient-text {
+  background: linear-gradient(135deg, #1d1d1f 30%, #515154 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.apple-blue-gradient {
+  background: linear-gradient(135deg, #0071e3 0%, #2997ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Clean Form Inputs */
+.apple-input {
+  background-color: #ffffff;
+  border: 1px solid #d2d2d7;
+  border-radius: 14px;
+  color: var(--apple-text-primary);
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+.apple-input:focus {
+  outline: none;
+  border-color: var(--apple-blue);
+  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.12);
+}
+
+/* Telugu typography refinement */
+[lang="te"], .telugu-text {
+  font-family: var(--apple-telugu-font) !important;
+  word-spacing: 0.05em;
+}
+
+/* Video Frame */
+.video-responsive {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.video-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Social Gradients */
+.ig-gradient {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.fb-gradient {
+  background: linear-gradient(135deg, #1877f2 0%, #0d5cb6 100%);
+}
+
+/* Minimal Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background: #d2d2d7;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a6;
+}
