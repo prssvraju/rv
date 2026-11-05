@@ -131,17 +131,7 @@ if ($requestMethod === 'POST') {
                     </div>
                 </form>
 
-                <!-- Demo Hint Box for Convenience -->
-                <div class="mt-6 p-3.5 rounded-xl bg-[#f5f5f7] border border-[#e5e5ea] text-[11px] text-[#6e6e73]">
-                    <div class="font-semibold text-[#1d1d1f] flex items-center gap-1.5 mb-1">
-                        <span>🔐</span> Authorized Access
-                    </div>
-                    <p class="leading-relaxed">
-                        Default login credentials: <br>
-                        Username: <code class="bg-white px-1.5 py-0.5 rounded border border-[#d2d2d7] font-semibold text-[#1d1d1f]">admin</code> &bull; 
-                        Password: <code class="bg-white px-1.5 py-0.5 rounded border border-[#d2d2d7] font-semibold text-[#1d1d1f]">admin</code>
-                    </p>
-                </div>
+
 
             </div>
 
