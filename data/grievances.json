@@ -1,5 +1,18 @@
 [
     {
+        "id": "VR-BV-3845",
+        "timestamp": "2026-11-05 16:55:06",
+        "name": "Ch. Surya Rao",
+        "phone": "9848099887",
+        "ward": "Ward 07 (Bhimavaram Town)",
+        "locality": "Main Bazaar",
+        "category": "Drinking Water Supply",
+        "priority": "Urgent",
+        "description": "Testing automated WhatsApp grievance notification dispatch.",
+        "status": "Received",
+        "notes": "Acknowledged. Assigned to ward coordination team for review."
+    },
+    {
         "id": "VR-BV-7251",
         "timestamp": "2026-11-04 19:06:24",
         "name": "R. Subrahmanyam",
