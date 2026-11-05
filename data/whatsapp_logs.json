@@ -1,0 +1,11 @@
+[
+    {
+        "sent": false,
+        "provider": "ultramsg",
+        "recipient": "919848099887",
+        "tracking_id": "VR-BV-3845",
+        "timestamp": "2026-11-05 16:55:06",
+        "details": "WhatsApp gateway configured in readiness mode. Enter credentials in config\/whatsapp.php to enable automatic background SMS.",
+        "simulated": true
+    }
+]

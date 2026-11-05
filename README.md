@@ -38,6 +38,8 @@ A professional, executive-level public portal designed with Apple’s clean whit
 6. **Praja Vani (Citizen Grievance & Tracking Portal)**:
    - Apple Support / Genius Bar style grievance registration form across all 39 municipal wards of Bhimavaram.
    - Live status tracking with a 4-step progress stepper.
+   - **Automated WhatsApp / SMS Notification**: Automatically dispatches tracking IDs directly to citizen mobile numbers upon submission.
+   - Supported gateways: **UltraMsg**, **Meta WhatsApp Cloud API**, **WATI**, and **Fast2SMS**. Configured via `config/whatsapp.php`.
    - Secure office management portal at `admin_login.php` leading to `admin_grievances.php`.
 
 ---

@@ -62,10 +62,17 @@ $newGrievance = [
 array_unshift($grievances, $newGrievance);
 file_put_contents($dataPath, json_encode($grievances, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
+// Trigger Automated Server-Side WhatsApp Dispatch
+require_once __DIR__ . '/includes/whatsapp_service.php';
+$dispatchResult = sendAutomatedWhatsAppGrievance($newGrievance);
+
 echo json_encode([
     'success' => true,
     'tracking_id' => $trackingId,
     'message' => 'Your civic grievance has been recorded successfully. Rohini Vegesna\'s team will follow up promptly.',
-    'data' => $newGrievance
+    'data' => $newGrievance,
+    'whatsapp_sent' => $dispatchResult['sent'] ?? false,
+    'whatsapp_recipient' => $dispatchResult['recipient'] ?? '',
+    'whatsapp_details' => $dispatchResult['details'] ?? ''
 ]);
 

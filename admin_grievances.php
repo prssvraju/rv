@@ -165,7 +165,15 @@ $resolved = count(array_filter($grievances, fn($g) => ($g['status'] ?? '') === '
                                     </td>
                                     <td class="px-5 py-4 font-medium text-[#1d1d1f] whitespace-nowrap">
                                         <?= htmlspecialchars($g['name']) ?>
-                                        <div class="text-[11px] text-[#86868b]"><?= htmlspecialchars($g['phone']) ?></div>
+                                        <div class="mt-0.5">
+                                            <?php 
+                                            $cleanP = preg_replace('/\D/', '', $g['phone'] ?? '');
+                                            if (strlen($cleanP) === 10) $cleanP = '91' . $cleanP;
+                                            ?>
+                                            <a href="https://wa.me/<?= $cleanP ?>" target="_blank" class="text-[11px] text-[#0071e3] hover:underline inline-flex items-center gap-1 font-normal" title="Open WhatsApp chat with citizen">
+                                                <span>💬</span> <?= htmlspecialchars($g['phone']) ?>
+                                            </a>
+                                        </div>
                                     </td>
                                     <td class="px-5 py-4 whitespace-nowrap">
                                         <span class="text-[#1d1d1f] font-medium"><?= htmlspecialchars($g['ward']) ?></span>
@@ -213,6 +221,93 @@ $resolved = count(array_filter($grievances, fn($g) => ($g['status'] ?? '') === '
                         <?php endif; ?>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- WhatsApp Dispatch & Gateway Center -->
+        <?php
+        $waLogFile = __DIR__ . '/data/whatsapp_logs.json';
+        $waLogs = file_exists($waLogFile) ? json_decode(file_get_contents($waLogFile), true) ?: [] : [];
+        $waConfig = file_exists(__DIR__ . '/config/whatsapp.php') ? include __DIR__ . '/config/whatsapp.php' : ['active' => false];
+        $isGatewayActive = !empty($waConfig['active']);
+        ?>
+        <div class="apple-card p-6 sm:p-8 mt-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#f0f0f2]">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl shadow-sm">
+                        💬
+                    </div>
+                    <div>
+                        <h3 class="text-base font-semibold text-[#1d1d1f]">Automated WhatsApp & SMS Gateway</h3>
+                        <p class="text-xs text-[#86868b]">Real-time automatic dispatch of tracking IDs to citizen WhatsApp numbers</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold <?= $isGatewayActive ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200' ?>">
+                        ● <?= $isGatewayActive ? 'Live Gateway Active (' . strtoupper($waConfig['provider'] ?? 'API') . ')' : 'Readiness Mode (Click-to-WhatsApp Active)' ?>
+                    </span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                <div class="p-4 rounded-xl bg-[#f5f5f7]">
+                    <span class="text-[10px] uppercase font-bold text-[#86868b] block">Configured Provider</span>
+                    <span class="text-sm font-semibold text-[#1d1d1f]"><?= htmlspecialchars(ucfirst($waConfig['provider'] ?? 'UltraMsg')) ?></span>
+                    <p class="text-[11px] text-[#86868b] mt-0.5">Edit in <code class="bg-white px-1 py-0.5 rounded text-[10px]">config/whatsapp.php</code></p>
+                </div>
+                <div class="p-4 rounded-xl bg-[#f5f5f7]">
+                    <span class="text-[10px] uppercase font-bold text-[#86868b] block">Total Dispatches Logged</span>
+                    <span class="text-sm font-semibold text-[#1d1d1f]"><?= count($waLogs) ?> Messages</span>
+                    <p class="text-[11px] text-[#86868b] mt-0.5">Stored in <code class="bg-white px-1 py-0.5 rounded text-[10px]">data/whatsapp_logs.json</code></p>
+                </div>
+                <div class="p-4 rounded-xl bg-[#f5f5f7]">
+                    <span class="text-[10px] uppercase font-bold text-[#86868b] block">Supported Gateways</span>
+                    <span class="text-sm font-semibold text-[#1d1d1f]">UltraMsg, Meta API, Fast2SMS</span>
+                    <p class="text-[11px] text-[#86868b] mt-0.5">Direct background delivery to WhatsApp</p>
+                </div>
+            </div>
+
+            <!-- Recent Dispatch Logs -->
+            <div>
+                <h4 class="text-xs font-semibold text-[#1d1d1f] uppercase tracking-wider mb-3">Recent Automated Notifications</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-[#424245]">
+                        <thead class="bg-[#f5f5f7] text-[10px] uppercase text-[#86868b]">
+                            <tr>
+                                <th class="px-4 py-2 font-semibold">Timestamp</th>
+                                <th class="px-4 py-2 font-semibold">Tracking ID</th>
+                                <th class="px-4 py-2 font-semibold">Recipient WhatsApp</th>
+                                <th class="px-4 py-2 font-semibold">Delivery Status</th>
+                                <th class="px-4 py-2 font-semibold">Gateway Note</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#f0f0f2]">
+                            <?php if (empty($waLogs)): ?>
+                                <tr>
+                                    <td colspan="5" class="px-4 py-4 text-center text-[#86868b]">No notifications dispatched yet.</td>
+                                </tr>
+                            <?php else: ?>
+                                <?php foreach (array_slice($waLogs, 0, 5) as $log): ?>
+                                    <tr>
+                                        <td class="px-4 py-2.5 font-mono text-[11px] text-[#86868b] whitespace-nowrap"><?= htmlspecialchars($log['timestamp'] ?? '') ?></td>
+                                        <td class="px-4 py-2.5 font-mono font-bold text-[#0071e3] whitespace-nowrap"><?= htmlspecialchars($log['tracking_id'] ?? '') ?></td>
+                                        <td class="px-4 py-2.5 font-medium text-[#1d1d1f] whitespace-nowrap">
+                                            <a href="https://wa.me/<?= htmlspecialchars($log['recipient'] ?? '') ?>" target="_blank" class="hover:underline text-emerald-700">
+                                                +<?= htmlspecialchars($log['recipient'] ?? '') ?>
+                                            </a>
+                                        </td>
+                                        <td class="px-4 py-2.5 whitespace-nowrap">
+                                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold <?= !empty($log['sent']) ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-700' ?>">
+                                                <?= !empty($log['sent']) ? '✓ Delivered via API' : 'Ready / Click-to-Chat' ?>
+                                            </span>
+                                        </td>
+                                        <td class="px-4 py-2.5 text-[11px] text-[#86868b] max-w-xs truncate"><?= htmlspecialchars($log['details'] ?? '') ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </main>
