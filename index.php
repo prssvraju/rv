@@ -98,7 +98,6 @@
           <a href="#about" class="hover:text-[#0071e3] transition" data-i18n="nav_about">About</a>
           <a href="#vision" class="hover:text-[#0071e3] transition" data-i18n="nav_vision">Vision & Pillars</a>
           <a href="#social" class="hover:text-[#0071e3] transition" data-i18n="nav_social">Social Hub</a>
-          <a href="#academia" class="hover:text-[#0071e3] transition" data-i18n="nav_academia">Academia & AI</a>
           <a href="#media" class="hover:text-[#0071e3] transition" data-i18n="nav_media">Media & Press</a>
           <a href="#grievance" class="hover:text-[#0071e3] transition" data-i18n="nav_grievance">Praja Vani</a>
         </nav>
@@ -135,7 +134,6 @@
         <a href="#about" class="block px-3 py-2 rounded-xl text-sm font-medium text-[#1d1d1f] hover:bg-[#f5f5f7]" data-i18n="nav_about">About</a>
         <a href="#vision" class="block px-3 py-2 rounded-xl text-sm font-medium text-[#1d1d1f] hover:bg-[#f5f5f7]" data-i18n="nav_vision">Vision & Pillars</a>
         <a href="#social" class="block px-3 py-2 rounded-xl text-sm font-medium text-[#1d1d1f] hover:bg-[#f5f5f7]" data-i18n="nav_social">Social Hub</a>
-        <a href="#academia" class="block px-3 py-2 rounded-xl text-sm font-medium text-[#1d1d1f] hover:bg-[#f5f5f7]" data-i18n="nav_academia">Academia & AI</a>
         <a href="#media" class="block px-3 py-2 rounded-xl text-sm font-medium text-[#1d1d1f] hover:bg-[#f5f5f7]" data-i18n="nav_media">Media & Press</a>
         <a href="#grievance" class="block px-3 py-2 rounded-xl text-sm font-medium text-[#1d1d1f] hover:bg-[#f5f5f7]" data-i18n="nav_grievance">Praja Vani</a>
         <div class="pt-2">
@@ -229,8 +227,8 @@
           <p class="text-xs text-[#86868b] mt-1 font-normal" data-i18n="hero_stat_wards">Municipal Wards</p>
         </div>
         <div>
-          <div class="text-3xl sm:text-4xl font-semibold tracking-tight text-[#1d1d1f] counter-val" data-count="3" data-plus="true">3+</div>
-          <p class="text-xs text-[#86868b] mt-1 font-normal" data-i18n="hero_stat_papers">AI / Tech Publications</p>
+          <div class="text-3xl sm:text-4xl font-semibold tracking-tight text-[#1d1d1f] counter-val" data-count="6">6</div>
+          <p class="text-xs text-[#86868b] mt-1 font-normal" data-i18n="hero_stat_papers">Core Vision Pillars</p>
         </div>
         <div>
           <div class="text-3xl sm:text-4xl font-semibold tracking-tight text-[#0071e3]">100%</div>
@@ -565,8 +563,8 @@
     </div>
   </section>
 
-  <!-- ACADEMIA & AI RESEARCH (APPLE WHITE PAPER STYLE) -->
-  <section id="academia" class="py-24 bg-white relative">
+  <!-- ACADEMIA & AI RESEARCH (HIDDEN) -->
+  <section id="academia" class="hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="max-w-3xl mx-auto text-center mb-16">
@@ -934,7 +932,7 @@
           <ul class="space-y-2 text-xs">
             <li><a href="#about" class="hover:text-[#0071e3] transition">About Rohini</a></li>
             <li><a href="#vision" class="hover:text-[#0071e3] transition">Vision & 6 Pillars</a></li>
-            <li><a href="#academia" class="hover:text-[#0071e3] transition">SRKR College & AI Papers</a></li>
+            <li><a href="#social" class="hover:text-[#0071e3] transition">Official Social Hub</a></li>
             <li><a href="#media" class="hover:text-[#0071e3] transition">Press & Speeches</a></li>
             <li><a href="#grievance" class="hover:text-[#0071e3] transition">Praja Vani Grievances</a></li>
           </ul>
