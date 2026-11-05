@@ -38,7 +38,16 @@ A professional, executive-level public portal designed with Apple’s clean whit
 6. **Praja Vani (Citizen Grievance & Tracking Portal)**:
    - Apple Support / Genius Bar style grievance registration form across all 39 municipal wards of Bhimavaram.
    - Live status tracking with a 4-step progress stepper.
-   - Admin management dashboard at `admin_grievances.php`.
+   - Secure office management portal at `admin_login.php` leading to `admin_grievances.php`.
+
+---
+
+## 🔐 Admin Login Credentials
+
+- **Admin Login URL**: [http://localhost/rv/admin_login.php](http://localhost/rv/admin_login.php)
+- **Username**: `admin`
+- **Password**: `admin`
+*(Alternative authorized credentials: `rohini` / `rohini2026` or `prssvraju` / `admin123`)*
 
 ---
 
@@ -46,6 +55,7 @@ A professional, executive-level public portal designed with Apple’s clean whit
 
 - **Via Local Apache (XAMPP)**:
   - Main Portal: [http://localhost/rv/](http://localhost/rv/)
+  - Office Admin Login: [http://localhost/rv/admin_login.php](http://localhost/rv/admin_login.php)
   - Office Dashboard: [http://localhost/rv/admin_grievances.php](http://localhost/rv/admin_grievances.php)
 - **Direct File**:
   - Open [`index.html`](file:///Applications/XAMPP/xamppfiles/htdocs/rv/index.html) directly in any web browser.
