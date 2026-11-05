@@ -25,9 +25,10 @@ return [
 
     // 2. Meta Official WhatsApp Cloud API (developers.facebook.com)
     'meta' => [
-        'phone_number_id' => '', // Meta WhatsApp Phone Number ID
-        'access_token'    => '', // System User Permanent Token
-        'template_name'   => 'grievance_acknowledgment', // Optional approved template
+        'phone_number_id' => '', // Meta WhatsApp Phone Number ID (From WhatsApp > API Setup)
+        'access_token'    => '', // System User Permanent Token (Never expires)
+        'template_name'   => 'grievance_acknowledgment', // Name of approved template in WhatsApp Manager
+        'language_code'   => 'en', // Template language code (e.g. 'en' or 'te')
     ],
 
     // 3. WATI WhatsApp Gateway
@@ -55,3 +56,4 @@ return [
         'whatsapp_number' => '919848012345',
     ]
 ];
+

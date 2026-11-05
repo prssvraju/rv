@@ -102,14 +102,45 @@ function sendAutomatedWhatsAppGrievance($citizenData) {
             case 'meta':
                 $phoneId = $config['meta']['phone_number_id'] ?? '';
                 $accessToken = $config['meta']['access_token'] ?? '';
+                $templateName = $config['meta']['template_name'] ?? '';
+                $langCode = $config['meta']['language_code'] ?? 'en';
+
                 if (!empty($phoneId) && !empty($accessToken)) {
                     $url = "https://graph.facebook.com/v18.0/{$phoneId}/messages";
-                    $body = json_encode([
-                        'messaging_product' => 'whatsapp',
-                        'to' => $cleanPhone,
-                        'type' => 'text',
-                        'text' => ['body' => $message]
-                    ]);
+
+                    // If an approved template is configured, use the official Meta template structure
+                    if (!empty($templateName)) {
+                        $payload = [
+                            'messaging_product' => 'whatsapp',
+                            'to' => $cleanPhone,
+                            'type' => 'template',
+                            'template' => [
+                                'name' => $templateName,
+                                'language' => ['code' => $langCode],
+                                'components' => [
+                                    [
+                                        'type' => 'body',
+                                        'parameters' => [
+                                            ['type' => 'text', 'text' => $name],
+                                            ['type' => 'text', 'text' => $trackingId],
+                                            ['type' => 'text', 'text' => $ward],
+                                            ['type' => 'text', 'text' => $category]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ];
+                    } else {
+                        // Fallback to direct text message (valid within 24hr window or test sandbox)
+                        $payload = [
+                            'messaging_product' => 'whatsapp',
+                            'to' => $cleanPhone,
+                            'type' => 'text',
+                            'text' => ['body' => $message]
+                        ];
+                    }
+
+                    $body = json_encode($payload);
 
                     $ch = curl_init($url);
                     curl_setopt_array($ch, [
@@ -129,7 +160,7 @@ function sendAutomatedWhatsAppGrievance($citizenData) {
 
                     if ($httpCode >= 200 && $httpCode < 300) {
                         $result['sent'] = true;
-                        $result['details'] = 'Sent via Meta Cloud API';
+                        $result['details'] = 'Sent via Meta Cloud API (' . (!empty($templateName) ? 'Template: ' . $templateName : 'Text') . ')';
                     } else {
                         $result['details'] = "Meta API HTTP {$httpCode}: " . $resp;
                     }
@@ -197,3 +228,4 @@ function sendAutomatedWhatsAppGrievance($citizenData) {
 
     return $result;
 }
+
