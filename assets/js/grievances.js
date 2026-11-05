@@ -1,6 +1,19 @@
 /**
  * Praja Vani (Citizen Grievance) Interactive Logic (Apple-Inspired White Theme)
+ * Automatically sends tracking ID and confirmation to the citizen's given WhatsApp number
  */
+
+// Helper to sanitize and format phone number for WhatsApp
+function formatWhatsAppNumber(phoneStr) {
+  let cleaned = (phoneStr || '').replace(/\D/g, '');
+  // If 10 digits (standard Indian mobile like 9848012345), prepend country code 91
+  if (cleaned.length === 10) {
+    cleaned = '91' + cleaned;
+  } else if (cleaned.length === 11 && cleaned.startsWith('0')) {
+    cleaned = '91' + cleaned.substring(1);
+  }
+  return cleaned;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const grievanceForm = document.getElementById('grievanceForm');
@@ -8,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const trackingNumberDisplay = document.getElementById('trackingNumberDisplay');
   const trackingTimeDisplay = document.getElementById('trackingTimeDisplay');
   const submitBtn = document.getElementById('submitGrievanceBtn');
+  const waRecipientNumber = document.getElementById('waRecipientNumber');
+  const resetFormBtn = document.getElementById('resetGrievanceFormBtn');
 
   // Status check elements
   const statusInput = document.getElementById('trackStatusInput');
@@ -39,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-          </svg> Registering...
+          </svg> Registering & Sending WhatsApp...
         `;
       }
 
@@ -63,13 +78,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (result && result.success) {
           const trackId = result.tracking_id;
+          const cleanPhone = formatWhatsAppNumber(formData.phone);
+          const portalBaseUrl = window.location.href.split('#')[0];
+          const trackUrl = `${portalBaseUrl}#grievance`;
+
+          // Construct official WhatsApp message to send to the given number
+          const waMessage = 
+`🏛️ *Vegesna Rohini Office - Praja Vani (భీమవరం)*
+
+Namaste *${formData.name}* garu,
+
+Your civic grievance has been successfully registered with Vegesna Rohini's office.
+
+📋 *Tracking ID:* *${trackId}*
+📍 *Ward:* ${formData.ward}
+🏷️ *Category:* ${formData.category}
+📅 *Date:* ${result.data?.timestamp || new Date().toLocaleString()}
+
+🔍 *Track Status Online:*
+${trackUrl}
+
+Our ward team has been notified and will review the issue promptly.
+Thank you for your active participation in building *Swachh & Swarna Bhimavaram*.`;
+
+          const waUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(waMessage)}`;
+
+          // Hide form & display confirmation card
           grievanceForm.classList.add('hidden');
           if (formSuccessCard) {
             formSuccessCard.classList.remove('hidden');
             if (trackingNumberDisplay) trackingNumberDisplay.textContent = trackId;
-            if (trackingTimeDisplay) trackingTimeDisplay.textContent = result.data.timestamp || new Date().toLocaleString();
-            
-            // Copy button
+            if (trackingTimeDisplay) trackingTimeDisplay.textContent = result.data?.timestamp || new Date().toLocaleString();
+            if (waRecipientNumber) waRecipientNumber.textContent = `+${cleanPhone}`;
+
+            // Set WhatsApp action link
+            const waBtn = document.getElementById('whatsappTrackingBtn');
+            if (waBtn) {
+              waBtn.href = waUrl;
+            }
+
+            // Setup copy tracking ID button
             const copyBtn = document.getElementById('copyTrackingBtn');
             if (copyBtn) {
               copyBtn.onclick = () => {
@@ -81,11 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
               };
             }
 
-            // WhatsApp link
-            const waBtn = document.getElementById('whatsappTrackingBtn');
-            if (waBtn) {
-              const waText = encodeURIComponent(`Namaste Rohini Garu, I have submitted a civic grievance for ${formData.ward}. Tracking ID: ${trackId}`);
-              waBtn.href = `https://wa.me/?text=${waText}`;
+            // Automatically open WhatsApp in new tab to the given number
+            try {
+              window.open(waUrl, '_blank');
+            } catch (err) {
+              console.log('Popup blocked, available via button:', err);
             }
           }
         } else {
@@ -94,17 +142,36 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         console.warn('Backend unavailable, using client-side acknowledgment:', err);
         const fallbackId = 'VR-BV-' + Math.floor(1000 + Math.random() * 9000);
+        const cleanPhone = formatWhatsAppNumber(formData.phone);
+        const waMessage = `🏛️ Vegesna Rohini Office - Praja Vani\nNamaste ${formData.name},\nYour grievance has been recorded. Tracking ID: ${fallbackId} for ${formData.ward}.`;
+        const waUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(waMessage)}`;
+
         grievanceForm.classList.add('hidden');
         if (formSuccessCard) {
           formSuccessCard.classList.remove('hidden');
           if (trackingNumberDisplay) trackingNumberDisplay.textContent = fallbackId;
           if (trackingTimeDisplay) trackingTimeDisplay.textContent = new Date().toLocaleString();
+          if (waRecipientNumber) waRecipientNumber.textContent = `+${cleanPhone}`;
+          const waBtn = document.getElementById('whatsappTrackingBtn');
+          if (waBtn) waBtn.href = waUrl;
+          window.open(waUrl, '_blank');
         }
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Submit Grievance to Office';
         }
+      }
+    });
+  }
+
+  // Reset form to submit another grievance
+  if (resetFormBtn) {
+    resetFormBtn.addEventListener('click', () => {
+      if (formSuccessCard) formSuccessCard.classList.add('hidden');
+      if (grievanceForm) {
+        grievanceForm.reset();
+        grievanceForm.classList.remove('hidden');
       }
     });
   }
