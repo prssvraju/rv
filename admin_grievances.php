@@ -1,10 +1,36 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Authentication Guard: Redirect to login if not authenticated
+if (!isset($_SESSION['vr_admin_logged_in']) || $_SESSION['vr_admin_logged_in'] !== true) {
+    header('Location: admin_login.php');
+    exit;
+}
+
+// Handle Logout
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    $_SESSION = [];
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(session_name(), '', time() - 42000,
+            $params["path"], $params["domain"],
+            $params["secure"], $params["httponly"]
+        );
+    }
+    session_destroy();
+    header('Location: admin_login.php?logout=1');
+    exit;
+}
+
 $dataPath = __DIR__ . '/data/grievances.json';
 $grievances = file_exists($dataPath) ? json_decode(file_get_contents($dataPath), true) ?: [] : [];
 
 // Status update handling
 $message = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_status') {
+$requestMethod = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+if ($requestMethod === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_status') {
     $id = trim($_POST['id'] ?? '');
     $newStatus = trim($_POST['status'] ?? '');
     $notes = trim($_POST['notes'] ?? '');
@@ -56,8 +82,18 @@ $resolved = count(array_filter($grievances, fn($g) => ($g['status'] ?? '') === '
                 </a>
             </div>
             <div class="flex items-center gap-3">
-                <a href="index.php" class="apple-btn-secondary px-3.5 py-1.5 text-xs">← Back to Portal</a>
-                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">System Live</span>
+                <!-- User Profile Pill -->
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-[#e8f0fe] text-xs text-[#0071e3] font-medium border border-[#0071e3]/20">
+                    <span class="w-2 h-2 rounded-full bg-[#0071e3]"></span>
+                    <span>Admin: <?= htmlspecialchars($_SESSION['vr_admin_user'] ?? 'Office') ?></span>
+                </div>
+                
+                <a href="index.php" target="_blank" class="apple-btn-secondary px-3.5 py-1.5 text-xs">View Public Site ↗</a>
+                
+                <!-- Sign Out Button -->
+                <a href="admin_grievances.php?action=logout" class="apple-btn-secondary px-3.5 py-1.5 text-xs text-rose-600 hover:text-rose-700 hover:bg-rose-50 border-rose-200">
+                    Sign Out
+                </a>
             </div>
         </div>
     </header>

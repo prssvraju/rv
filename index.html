@@ -893,8 +893,8 @@
             </div>
 
             <div class="pt-3 border-t border-[#f0f0f2] flex items-center justify-between text-xs">
-              <a href="admin_grievances.php" class="text-[#0071e3] hover:underline font-medium flex items-center gap-1">
-                <span>🔒</span> Office Admin Dashboard
+              <a href="admin_login.php" class="text-[#0071e3] hover:underline font-medium flex items-center gap-1">
+                <span>🔒</span> Office Admin Login
               </a>
               <span class="text-[#86868b]">Bhimavaram Municipality</span>
             </div>
@@ -957,8 +957,8 @@
               </a>
             </li>
             <li class="pt-1">
-              <a href="admin_grievances.php" class="text-[#86868b] hover:text-[#0071e3] transition flex items-center gap-1 text-[11px]">
-                <span>🔐</span> Ward Team Dashboard
+              <a href="admin_login.php" class="text-[#86868b] hover:text-[#0071e3] transition flex items-center gap-1 text-[11px]">
+                <span>🔐</span> Ward Team Login
               </a>
             </li>
           </ul>
